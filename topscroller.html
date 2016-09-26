@@ -1,0 +1,83 @@
+<!Doctype html>
+<html>
+<head>
+	<title>Top Scroller</title>
+	<style>
+
+		 *{
+			margin: 0 auto;
+			padding: 0;
+		} 
+
+		.head{
+			padding-top: 50px;
+			width: 100%;
+			height: 300px;
+			background-color: grey;
+		}	
+
+		.main{
+			width: 100%;
+			height: 800px;
+			background-color: darkgrey;
+		}
+
+		.top-Scroll{
+			opacity: 0;
+			padding-top: 25px;
+			padding-left: 25px;
+			width: 60px;
+			height: 60px;
+			background-color: tomato;
+			position: fixed;
+			bottom: 50px;
+			right: 50px;
+
+			transition: all 1s;
+		}
+
+		.top-Scroll:hover{
+			cursor: pointer;
+		}
+
+	</style>
+</head>
+<body onScroll="topScroller()">
+	
+	<div class="head">
+		
+		
+		<h1>This is a header for this project</h1>
+
+	</div>
+	<div class="main"></div>
+	<div class="top-Scroll" id="goUp">TOP</div>
+
+	<script>
+
+		var goUp = document.getElementById('goUp');
+
+		goUp.addEventListener("click", function(){
+			var currVal = document.body.scrollTop;
+			console.log(currVal);
+			var scroller = setInterval(function(){ 
+				document.body.scrollTop = currVal;
+				console.log(currVal);
+				currVal -= 2;
+				if(document.body.scrollTop <= 0){
+					console.log("interval cleared now");
+					clearInterval(scroller);
+				}
+			}, 1);
+		}, false);
+
+		function topScroller () {
+			if(document.body.scrollTop > 1 || document.documentElement.scrollTop > 1){
+				goUp.style.opacity = "1";
+			}
+		}
+
+	</script>
+
+</body>
+</html>
